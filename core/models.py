@@ -7,7 +7,7 @@ class Categoria(models.Model):
         return self.descricao
 
 class Editora(models.Model):
-    nome = models.CharField(max_length=99)
+    nome = models.CharField(max_length=100)
     site = models.URLField()
     def __str__(self):
         return self.nome
@@ -26,6 +26,7 @@ class Livro(models.Model):
     ISBN = models.CharField(max_length=32)
     quantidade = models.IntegerField()
     preco = models.DecimalField(max_digits=7, decimal_places=2)
+    autores = models.ManyToManyField(Autor, related_name="livros")
     categoria = models.ForeignKey(
         Categoria, on_delete=models.PROTECT, related_name='livros'
     )
